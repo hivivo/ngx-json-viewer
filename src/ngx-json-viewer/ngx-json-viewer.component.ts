@@ -31,6 +31,12 @@ export class NgxJsonViewerComponent implements OnChanges {
     return segment.type === 'object' || segment.type === 'array';
   }
 
+  toggle(segment: Segment) {
+    if (this.isExpandable(segment)) {
+      segment.expanded = !segment.expanded;
+    }
+  }
+
   private parseKeyValue(key: any, value: any): Segment {
     const segment: Segment = {
       key: key,

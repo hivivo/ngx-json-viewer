@@ -26,6 +26,22 @@ $type-colors: (
     .segment-main {
       white-space: nowrap;
 
+      .toggler {
+        position: absolute;
+        margin-left: -14px;
+        margin-top: 3px;
+        font-size: .8em;
+        line-height: 1.2em;
+        vertical-align: middle;
+        color: #787878;
+
+        &::after {
+          display: inline-block;
+          content: "►";
+          transition: transform 0.1s ease-in;
+        }
+      }
+
       .segment-key {
         color: #4E187C;
       }
@@ -61,5 +77,14 @@ $type-colors: (
     & > .segment-value {
       background-color: #999;
     }
+  }
+
+  .expanded > .toggler::after {
+    transform: rotate(90deg);
+  }
+
+  .expandable,
+  .expandable > .toggler {
+    cursor: pointer;
   }
 }
