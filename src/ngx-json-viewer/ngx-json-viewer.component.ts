@@ -27,6 +27,10 @@ export class NgxJsonViewerComponent implements OnChanges {
     }
   }
 
+  isExpandable(segment: Segment) {
+    return segment.type === 'object' || segment.type === 'array';
+  }
+
   private parseKeyValue(key: any, value: any): Segment {
     const segment: Segment = {
       key: key,
@@ -35,6 +39,47 @@ export class NgxJsonViewerComponent implements OnChanges {
       description: '' + value,
       expanded: true
     };
+
+    switch (typeof segment.value) {
+      case 'number': {
+        segment.type = 'number';
+        break;
+      }
+      case 'boolean': {
+        segment.type = 'boolean';
+        break;
+      }
+      case 'function': {
+        segment.type = 'function';
+        break;
+      }
+      case 'string': {
+        segment.type = 'string';
+        segment.description = '"' + segment.value + '"';
+        break;
+      }
+      case 'undefined': {
+        segment.type = 'undefined';
+        segment.description = 'undefined';
+        break;
+      }
+      case 'object': {
+        // yea, null is object
+        if (segment.value === null) {
+          segment.type = 'null';
+          segment.description = 'null';
+        } else if (Array.isArray(segment.value)) {
+          segment.type = 'array';
+          segment.description = 'Array[' + segment.value.length + '] ' + JSON.stringify(segment.value);
+        } else if (segment.value instanceof Date) {
+          segment.type = 'date';
+        } else {
+          segment.type = 'object';
+          segment.description = 'Object ' + JSON.stringify(segment.value);
+        }
+        break;
+      }
+    }
 
     return segment;
   }

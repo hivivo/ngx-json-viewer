@@ -3,7 +3,10 @@
     <section class="segment-main">
       <span class="segment-key">{{ segment.key }}</span>
       <span class="segment-separator">:</span>
-      <span class="segment-value">{{ segment.description }}</span>
+      <span *ngIf="!segment.expanded || !isExpandable(segment)" class="segment-value">{{ segment.description }}</span>
+    </section>
+    <section *ngIf="segment.expanded && isExpandable(segment)" class="children">
+      <ngx-json-viewer [json]="segment.value"></ngx-json-viewer>
     </section>
   </section>
 </section>
