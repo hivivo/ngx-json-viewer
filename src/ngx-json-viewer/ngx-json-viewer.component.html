@@ -1,3 +1,9 @@
-<div class="json-viewer">
-  {{ json | json }}
-</div>
+<section class="ngx-json-viewer">
+  <section *ngFor="let segment of segments" class="segment">
+    <section class="segment-main">
+      <span class="segment-key">{{ segment.key }}</span>
+      <span class="segment-separator">:</span>
+      <span class="segment-value">{{ segment.description }}</span>
+    </section>
+  </section>
+</section>
