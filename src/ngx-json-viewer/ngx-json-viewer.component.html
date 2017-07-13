@@ -1,5 +1,7 @@
 <section class="ngx-json-viewer">
-  <section *ngFor="let segment of segments" class="segment">
+  <section
+    *ngFor="let segment of segments"
+    [ngClass]="['segment', 'segment-type-' + segment.type]">
     <section class="segment-main">
       <span class="segment-key">{{ segment.key }}</span>
       <span class="segment-separator">:</span>

@@ -1,3 +1,17 @@
+$type-colors: (
+  string: #FF6B6B,
+  number: #009688,
+  boolean: #b938a4,
+  date: #05668D,
+
+  array: #999,
+  object: #999,
+  function: #999,
+
+  'null': #fff,
+  undefined: #fff
+);
+
 .ngx-json-viewer {
   font-family: monospace;
   font-size: 1em;
@@ -28,6 +42,24 @@
     .children {
       margin-left: 12px;
     }
+  }
 
+  @each $type, $color in $type-colors {
+    .segment-type-#{$type} > .segment-main > .segment-value {
+      color: $color;
+    }
+  }
+
+  // special cases need highlightted
+  .segment-type-null > .segment-main > .segment-value {
+    background-color: red;
+  }
+  .segment-type-undefined > .segment-main {
+    & > .segment-key {
+      color: #999;
+    }
+    & > .segment-value {
+      background-color: #999;
+    }
   }
 }
