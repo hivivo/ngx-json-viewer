@@ -16,10 +16,15 @@ interface Segment {
 export class NgxJsonViewerComponent implements OnChanges {
 
   @Input() json: any;
+  @Input() cleanOnChange = false;
 
   segments: Segment[] = [];
 
   ngOnChanges() {
+    if (this.cleanOnChange) {
+      this.segments = [];
+    }
+
     if (typeof this.json === 'object') {
       Object.keys(this.json).forEach( key => {
         this.segments.push(this.parseKeyValue(key, this.json[key]));
