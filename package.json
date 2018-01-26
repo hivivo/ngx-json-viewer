@@ -1,7 +1,7 @@
 {
   "name": "ngx-json-viewer",
-  "version": "1.0.0",
-  "description": "JSON formatter / viewer for Angular 4+",
+  "version": "2.0.0",
+  "description": "JSON formatter / viewer for Angular 2/4/5+",
   "main": "index.ts",
   "repository": {
     "type": "git",
@@ -16,5 +16,28 @@
   "bugs": {
     "url": "https://github.com/hivivo/ngx-json-viewer/issues"
   },
-  "homepage": "https://github.com/hivivo/ngx-json-viewer#readme"
+  "homepage": "https://github.com/hivivo/ngx-json-viewer#readme",
+  "scripts": {
+    "transpile": "ngc",
+    "package": "rollup -c",
+    "minify": "uglifyjs dist/bundles/jsvwr.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/jsvwr.umd.min.js",
+    "build": "npm run transpile && npm run package && npm run minify"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@angular/core": ">=5.0.0 <6.0.0",
+    "@angular/common": ">=5.0.0 <6.0.0",
+    "rxjs": "^5.5.2"
+  },
+  "devDependencies": {
+    "@angular/common": "^5.2.2",
+    "@angular/compiler": "^5.2.2",
+    "@angular/compiler-cli": "^5.2.2",
+    "@angular/core": "^5.2.2",
+    "rollup": "^0.55.0",
+    "rxjs": "^5.5.6",
+    "typescript": "^2.6.2",
+    "uglify-js": "^3.3.8",
+    "zone.js": "^0.8.20"
+  }
 }

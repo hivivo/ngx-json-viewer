@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+
 import { NgxJsonViewerComponent } from './ngx-json-viewer/ngx-json-viewer.component';
 
 @NgModule({
   imports: [
-    BrowserModule
+    CommonModule
   ],
   declarations: [
     NgxJsonViewerComponent
