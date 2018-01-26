@@ -1,9 +1,9 @@
 import { Component, OnChanges, Input } from '@angular/core';
 
-interface Segment {
+export interface Segment {
   key: string;
   value: any;
-  type: string;
+  type: undefined | string;
   description: string;
   expanded: boolean;
 }
