@@ -24,8 +24,6 @@ $type-colors: (
     margin: 1px 1px 1px 12px;
 
     .segment-main {
-      white-space: nowrap;
-
       .toggler {
         position: absolute;
         margin-left: -14px;
@@ -77,6 +75,9 @@ $type-colors: (
     & > .segment-value {
       background-color: #999;
     }
+  }
+  .segment-type-object > .segment-main {
+    white-space: nowrap;
   }
 
   .expanded > .toggler::after {

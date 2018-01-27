@@ -1,27 +1,32 @@
 {
   "name": "ngx-json-viewer",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "JSON formatter / viewer for Angular 2/4/5+",
-  "main": "index.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hivivo/ngx-json-viewer.git"
-  },
   "keywords": [
     "angular",
     "json"
   ],
   "author": "Vivo Xu <vivo@fancyber.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hivivo/ngx-json-viewer.git"
+  },
   "bugs": {
     "url": "https://github.com/hivivo/ngx-json-viewer/issues"
   },
   "homepage": "https://github.com/hivivo/ngx-json-viewer#readme",
+  "main": "index.ts",
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts"
+    }
+  },
   "scripts": {
-    "transpile": "ngc",
-    "package": "rollup -c",
-    "minify": "uglifyjs dist/bundles/jsvwr.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/jsvwr.umd.min.js",
-    "build": "npm run transpile && npm run package && npm run minify"
+    "build": "ng-packagr -p package.json",
+    "pack:lib": "npm run build && npm pack ./dist",
+    "publish:lib": "npm run build && npm publish ./dist"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -34,10 +39,9 @@
     "@angular/compiler": "^5.2.2",
     "@angular/compiler-cli": "^5.2.2",
     "@angular/core": "^5.2.2",
-    "rollup": "^0.55.0",
+    "ng-packagr": "^1.6.0",
     "rxjs": "^5.5.6",
     "typescript": "^2.6.2",
-    "uglify-js": "^3.3.8",
     "zone.js": "^0.8.20"
   }
 }
