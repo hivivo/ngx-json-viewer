@@ -76,7 +76,8 @@ $type-colors: (
       background-color: #999;
     }
   }
-  .segment-type-object > .segment-main {
+  .segment-type-object > .segment-main,
+  .segment-type-array > .segment-main {
     white-space: nowrap;
   }
 
