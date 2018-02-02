@@ -24,6 +24,8 @@ $type-colors: (
     margin: 1px 1px 1px 12px;
 
     .segment-main {
+      word-wrap: break-word;
+
       .toggler {
         position: absolute;
         margin-left: -14px;

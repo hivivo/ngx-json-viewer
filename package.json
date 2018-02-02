@@ -1,6 +1,6 @@
 {
   "name": "ngx-json-viewer",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "JSON formatter / viewer for Angular 2/4/5+",
   "keywords": [
     "angular",
