@@ -17,6 +17,7 @@ export class NgxJsonViewerComponent implements OnChanges {
 
   @Input() json: any;
   @Input() cleanOnChange = false;
+  @Input() expanded = true;
 
   segments: Segment[] = [];
 
@@ -48,7 +49,7 @@ export class NgxJsonViewerComponent implements OnChanges {
       value: value,
       type: undefined,
       description: '' + value,
-      expanded: true
+      expanded: this.expanded
     };
 
     switch (typeof segment.value) {
