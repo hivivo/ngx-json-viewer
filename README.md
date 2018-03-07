@@ -6,10 +6,10 @@ Live demo: https://stackblitz.com/edit/ngx-json-viewer
 
 ## Install
 ```bash
-# For Angular 5:
+# For Angular 4/5:
 npm install ngx-json-viewer
 
-# For Angular 2/4:
+# For Angular 2:
 npm install ngx-json-viewer@1
 ```
 NPM Package: https://www.npmjs.com/package/ngx-json-viewer
@@ -35,4 +35,9 @@ export class AppModule { }
 In your component:
 ```html
 <ngx-json-viewer [json]="someObject"></ngx-json-viewer>
+```
+
+To collapse all nodes at first:
+```html
+<ngx-json-viewer [json]="someObject" [expanded]="false"></ngx-json-viewer>
 ```
