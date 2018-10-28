@@ -33,6 +33,8 @@ export class NgxJsonViewerComponent implements OnChanges {
       Object.keys(this.json).forEach( key => {
         this.segments.push(this.parseKeyValue(key, this.json[key]));
       });
+    } else {
+      this.segments.push(this.parseKeyValue(`(${typeof this.json})`, this.json));
     }
   }
 
