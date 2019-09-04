@@ -41,3 +41,8 @@ To collapse all nodes at first:
 ```html
 <ngx-json-viewer [json]="someObject" [expanded]="false"></ngx-json-viewer>
 ```
+
+Makes URLs clickable
+```html
+<ngx-json-viewer [json]="someObject" [clickableLinks]="true"></ngx-json-viewer>
+```
