@@ -6,6 +6,7 @@ export interface Segment {
   type: undefined | string;
   description: string;
   expanded: boolean;
+  clickableLinks: boolean;
 }
 
 @Component({
@@ -17,6 +18,7 @@ export class NgxJsonViewerComponent implements OnChanges {
 
   @Input() json: any;
   @Input() expanded = true;
+  @Input() clickableLinks = false;
   /**
    * @deprecated It will be always true and deleted in version 3.0.0
    */
@@ -54,8 +56,10 @@ export class NgxJsonViewerComponent implements OnChanges {
       value: value,
       type: undefined,
       description: '' + value,
-      expanded: this.expanded
+      expanded: this.expanded,
+      clickableLinks: this.clickableLinks
     };
+    const htmlRegexp: any = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
 
     switch (typeof segment.value) {
       case 'number': {
@@ -71,8 +75,13 @@ export class NgxJsonViewerComponent implements OnChanges {
         break;
       }
       case 'string': {
-        segment.type = 'string';
-        segment.description = '"' + segment.value + '"';
+        if (segment.clickableLinks && htmlRegexp.test(segment.value)) {
+          segment.type = 'url';
+          segment.description = '<a href="' + segment.value + '">' + segment.value + '</a>';
+        } else {
+          segment.type = 'string';
+          segment.description = '"' + segment.value + '"';
+        }
         break;
       }
       case 'undefined': {
