@@ -14,9 +14,10 @@ export interface Segment {
   styleUrls: ['./ngx-json-viewer.component.scss']
 })
 export class NgxJsonViewerComponent implements OnChanges {
-
   @Input() json: any;
   @Input() expanded = true;
+  @Input() visibleDepth = -1;
+  @Input() depth = -1;
   /**
    * @deprecated It will be always true and deleted in version 3.0.0
    */
@@ -29,12 +30,16 @@ export class NgxJsonViewerComponent implements OnChanges {
       this.segments = [];
     }
 
+    this.depth++;
+
     if (typeof this.json === 'object') {
-      Object.keys(this.json).forEach( key => {
+      Object.keys(this.json).forEach(key => {
         this.segments.push(this.parseKeyValue(key, this.json[key]));
       });
     } else {
-      this.segments.push(this.parseKeyValue(`(${typeof this.json})`, this.json));
+      this.segments.push(
+        this.parseKeyValue(`(${typeof this.json})`, this.json)
+      );
     }
   }
 
@@ -54,7 +59,7 @@ export class NgxJsonViewerComponent implements OnChanges {
       value: value,
       type: undefined,
       description: '' + value,
-      expanded: this.expanded
+      expanded: this.isExpanded()
     };
 
     switch (typeof segment.value) {
@@ -87,7 +92,11 @@ export class NgxJsonViewerComponent implements OnChanges {
           segment.description = 'null';
         } else if (Array.isArray(segment.value)) {
           segment.type = 'array';
-          segment.description = 'Array[' + segment.value.length + '] ' + JSON.stringify(segment.value);
+          segment.description =
+            'Array[' +
+            segment.value.length +
+            '] ' +
+            JSON.stringify(segment.value);
         } else if (segment.value instanceof Date) {
           segment.type = 'date';
         } else {
@@ -99,5 +108,12 @@ export class NgxJsonViewerComponent implements OnChanges {
     }
 
     return segment;
+  }
+
+  private isExpanded(): boolean {
+    return (
+      this.expanded &&
+      !(this.visibleDepth > -1 && this.depth >= this.visibleDepth)
+    );
   }
 }
