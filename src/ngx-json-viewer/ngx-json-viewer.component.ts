@@ -14,6 +14,7 @@ export interface Segment {
   styleUrls: ['./ngx-json-viewer.component.scss']
 })
 export class NgxJsonViewerComponent implements OnChanges {
+
   @Input() json: any;
   @Input() expanded = true;
   @Input() visibleDepth = -1;
@@ -34,9 +35,7 @@ export class NgxJsonViewerComponent implements OnChanges {
         this.segments.push(this.parseKeyValue(key, this.json[key]));
       });
     } else {
-      this.segments.push(
-        this.parseKeyValue(`(${typeof this.json})`, this.json)
-      );
+      this.segments.push(this.parseKeyValue(`(${typeof this.json})`, this.json));
     }
   }
 
@@ -89,11 +88,7 @@ export class NgxJsonViewerComponent implements OnChanges {
           segment.description = 'null';
         } else if (Array.isArray(segment.value)) {
           segment.type = 'array';
-          segment.description =
-            'Array[' +
-            segment.value.length +
-            '] ' +
-            JSON.stringify(segment.value);
+          segment.description = 'Array[' + segment.value.length + '] ' + JSON.stringify(segment.value);
         } else if (segment.value instanceof Date) {
           segment.type = 'date';
         } else {
