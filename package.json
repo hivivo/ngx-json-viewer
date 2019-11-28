@@ -32,6 +32,7 @@
   "peerDependencies": {
     "@angular/core": ">=8.0.0",
     "@angular/common": ">=8.0.0",
+    "deep-equal": "^1.1.1",
     "rxjs": ">=6.5.3"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "@angular/compiler": "^8.2.14",
     "@angular/compiler-cli": "^8.2.14",
     "@angular/core": "^8.2.14",
+    "@types/deep-equal": "^1.0.1",
     "ng-packagr": "^5.7.1",
     "rxjs": "^6.5.3",
     "typescript": "<3.6",

@@ -7,15 +7,15 @@
       [ngClass]="{
         'segment-main': true,
         'expandable': isExpandable(segment),
-        'expanded': segment.expanded
+        'expanded': isChildExpanded(segment)
       }">
       <div *ngIf="isExpandable(segment)" class="toggler"></div>
       <span class="segment-key">{{ segment.key }}</span>
       <span class="segment-separator">: </span>
       <span *ngIf="!segment.expanded || !isExpandable(segment)" class="segment-value">{{ segment.description }}</span>
     </section>
-    <section *ngIf="segment.expanded && isExpandable(segment)" class="children">
-      <ngx-json-viewer [json]="segment.value" [expanded]="expanded"></ngx-json-viewer>
+    <section *ngIf="isChildExpanded(segment) && isExpandable(segment)" class="children">
+      <ngx-json-viewer [json]="segment.value" [expanded]="expanded" [path]="path.concat([segment.key])"></ngx-json-viewer>
     </section>
   </section>
 </section>
