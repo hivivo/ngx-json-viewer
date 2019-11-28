@@ -24,24 +24,26 @@
     }
   },
   "scripts": {
-    "build": "ng-packagr -p package.json",
+    "build": "ng-packagr -p package.json -c ./tsconfig.lib.json",
     "pack:lib": "npm run build && npm pack ./dist",
     "publish:lib": "npm run build && npm publish ./dist"
   },
   "dependencies": {},
   "peerDependencies": {
-    "@angular/core": ">=5.0.0",
-    "@angular/common": ">=5.0.0",
-    "rxjs": ">=5.5.2"
+    "@angular/core": ">=8.0.0",
+    "@angular/common": ">=8.0.0",
+    "deep-equal": "^1.1.1",
+    "rxjs": ">=6.5.3"
   },
   "devDependencies": {
-    "@angular/common": "^5.2.2",
-    "@angular/compiler": "^5.2.2",
-    "@angular/compiler-cli": "^5.2.2",
-    "@angular/core": "^5.2.2",
-    "ng-packagr": "^1.6.0",
-    "rxjs": "^5.5.6",
-    "typescript": "^2.6.2",
-    "zone.js": "^0.8.20"
+    "@angular/common": "^8.2.14",
+    "@angular/compiler": "^8.2.14",
+    "@angular/compiler-cli": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "@types/deep-equal": "^1.0.1",
+    "ng-packagr": "^5.7.1",
+    "rxjs": "^6.5.3",
+    "typescript": "<3.6",
+    "zone.js": "^0.10.2"
   }
 }

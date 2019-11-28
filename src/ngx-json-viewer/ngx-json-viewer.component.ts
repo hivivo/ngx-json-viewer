@@ -1,4 +1,5 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import isEqual from 'deep-equal';
 
 export interface Segment {
   key: string;
@@ -15,26 +16,37 @@ export interface Segment {
 })
 export class NgxJsonViewerComponent implements OnChanges {
 
+  @Input() path: string[] = [];
   @Input() json: any;
   @Input() expanded = true;
-  /**
-   * @deprecated It will be always true and deleted in version 3.0.0
-   */
-  @Input() cleanOnChange = true;
 
   segments: Segment[] = [];
+  private readonly expandedChildren = new Set<string>();
 
-  ngOnChanges() {
-    if (this.cleanOnChange) {
-      this.segments = [];
+  ngOnChanges(changes: SimpleChanges) {
+    // Re-parse only if JSON changed & values are not similar (use deep object/array comparison)
+    if (!changes.json || isEqual(changes.json.previousValue, changes.json.currentValue)) {
+      return;
+    }
+    const newJson = changes.json.currentValue;
+
+    if (typeof newJson === 'object') {
+      this.segments = Object.keys(newJson).map(key => this.parseKeyValue(key, newJson[key]));
+    } else {
+      this.segments = [this.parseKeyValue(`(${typeof newJson})`, newJson)];
     }
 
-    if (typeof this.json === 'object') {
-      Object.keys(this.json).forEach( key => {
-        this.segments.push(this.parseKeyValue(key, this.json[key]));
-      });
+    if (!changes.expanded) {
+      // Clean up expanded children keys that no longer exist.
+      for (const oldChildSegmentdKey in this.expandedChildren.values()) {
+        if (!this.segments.some(s => s.key === oldChildSegmentdKey)) {
+          this.expandedChildren.delete(oldChildSegmentdKey);
+        }
+      }
+
     } else {
-      this.segments.push(this.parseKeyValue(`(${typeof this.json})`, this.json));
+      // Clear the state of individual elements.
+      this.expandedChildren.clear();
     }
   }
 
@@ -42,19 +54,31 @@ export class NgxJsonViewerComponent implements OnChanges {
     return segment.type === 'object' || segment.type === 'array';
   }
 
+  isChildExpanded(segment: Segment | string) {
+    return this.expandedChildren.has(typeof segment === 'string' ? segment : segment.key);
+  }
+
   toggle(segment: Segment) {
+    // Check if the given segment is expandable.
+    // This check is required to avoid storing useless keys in the expanded children set.
     if (this.isExpandable(segment)) {
-      segment.expanded = !segment.expanded;
+      // Add or remove the segment key to the set of opened segments
+      if (this.isChildExpanded(segment)) {
+        this.expandedChildren.delete(segment.key);
+      } else {
+        this.expandedChildren.add(segment.key);
+      }
     }
   }
 
   private parseKeyValue(key: any, value: any): Segment {
     const segment: Segment = {
-      key: key,
-      value: value,
+      key,
+      value,
       type: undefined,
       description: '' + value,
-      expanded: this.expanded
+      // Retrieve the current expand state.
+      expanded: this.expanded || this.isChildExpanded(key),
     };
 
     switch (typeof segment.value) {
