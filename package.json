@@ -24,7 +24,7 @@
     }
   },
   "scripts": {
-    "build": "ng-packagr -p package.json",
+    "build": "ng-packagr -p package.json -c ./tsconfig.lib.json",
     "pack:lib": "npm run build && npm pack ./dist",
     "publish:lib": "npm run build && npm publish ./dist"
   },
