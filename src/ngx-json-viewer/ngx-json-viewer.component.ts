@@ -1,12 +1,5 @@
 import { Component, OnChanges, Input } from '@angular/core';
-
-export interface Segment {
-  key: string;
-  value: any;
-  type: undefined | string;
-  description: string;
-  expanded: boolean;
-}
+import { Segment, isCyclic } from "./segment";
 
 @Component({
   selector: 'ngx-json-viewer',
@@ -39,7 +32,8 @@ export class NgxJsonViewerComponent implements OnChanges {
   }
 
   isExpandable(segment: Segment) {
-    return segment.type === 'object' || segment.type === 'array';
+    const { cyclic } = isCyclic(segment);
+    return segment.type === 'object' && !cyclic || segment.type === 'array';
   }
 
   toggle(segment: Segment) {
@@ -91,9 +85,9 @@ export class NgxJsonViewerComponent implements OnChanges {
         } else if (segment.value instanceof Date) {
           segment.type = 'date';
         } else {
+          const { cyclic, err } = isCyclic(segment);
           segment.type = 'object';
-          segment.description = 'Object ' + JSON.stringify(segment.value);
-        }
+          segment.description = cyclic ? err : 'Object ' + JSON.stringify(segment.value);        }
         break;
       }
     }
