@@ -7,7 +7,7 @@ export interface Segment {
 }
 
 // Inspiration from https://stackoverflow.com/a/46461300/4544386
-// Tackles the problem with of cyclical objects.
+// Tackles the problem of cyclical objects.
 export const isCyclic = (segment: Segment) : { cyclic: boolean, err: string } => {
     let keys: string[] = [], stack: string[] = [];
     let cyclic: boolean = false;
