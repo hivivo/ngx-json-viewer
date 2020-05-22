@@ -12,10 +12,23 @@
       <div *ngIf="isExpandable(segment)" class="toggler"></div>
       <span class="segment-key">{{ segment.key }}</span>
       <span class="segment-separator">: </span>
-      <span *ngIf="!segment.expanded || !isExpandable(segment)" class="segment-value">{{ segment.description }}</span>
+      <ng-container *ngIf="!segment.expanded || !isExpandable(segment)">
+        <div *ngIf="isClickable(segment); then clickableDesc else noClickableDesc"></div>
+        <ng-template #clickableDesc>
+          <a class="segment-value" (click)="segmentClickHandler(segment)">{{ segment.description }}</a>
+        </ng-template>
+        <ng-template #noClickableDesc>
+          <span class="segment-value">{{ segment.description }}</span>
+        </ng-template>
+      </ng-container>
     </section>
     <section *ngIf="segment.expanded && isExpandable(segment)" class="children">
-      <ngx-json-viewer [json]="segment.value" [expanded]="expanded"></ngx-json-viewer>
+      <ngx-json-viewer [json]="segment.value"
+                       [expanded]="expanded"
+                       [_parent]="segment"
+                       [isSegmentClickable]="isSegmentClickable"
+                       (segmentClicked)="segmentClickHandler($event)"></ngx-json-viewer>
     </section>
   </section>
 </section>
+

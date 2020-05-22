@@ -1,12 +1,16 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import {Component, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 
-export interface Segment {
+export interface NgxJsonSegment {
+  parent: NgxJsonSegment | undefined;
   key: string;
   value: any;
   type: undefined | string;
   description: string;
   expanded: boolean;
+  path: string;
 }
+
+type IsSegmentClickableFn = (segment: NgxJsonSegment) => boolean;
 
 @Component({
   selector: 'ngx-json-viewer',
@@ -21,8 +25,11 @@ export class NgxJsonViewerComponent implements OnChanges {
    * @deprecated It will be always true and deleted in version 3.0.0
    */
   @Input() cleanOnChange = true;
+  @Input() isSegmentClickable: IsSegmentClickableFn;
+  @Input() _parent: NgxJsonSegment | undefined = undefined;
+  @Output() segmentClicked = new EventEmitter<NgxJsonSegment>();
 
-  segments: Segment[] = [];
+  segments: NgxJsonSegment[] = [];
 
   ngOnChanges() {
     if (this.cleanOnChange) {
@@ -30,7 +37,7 @@ export class NgxJsonViewerComponent implements OnChanges {
     }
 
     if (typeof this.json === 'object') {
-      Object.keys(this.json).forEach( key => {
+      Object.keys(this.json).forEach(key => {
         this.segments.push(this.parseKeyValue(key, this.json[key]));
       });
     } else {
@@ -38,18 +45,28 @@ export class NgxJsonViewerComponent implements OnChanges {
     }
   }
 
-  isExpandable(segment: Segment) {
+  isExpandable(segment: NgxJsonSegment) {
     return segment.type === 'object' || segment.type === 'array';
   }
 
-  toggle(segment: Segment) {
+  toggle(segment: NgxJsonSegment) {
     if (this.isExpandable(segment)) {
       segment.expanded = !segment.expanded;
     }
   }
 
-  private parseKeyValue(key: any, value: any): Segment {
-    const segment: Segment = {
+  segmentClickHandler(segment: NgxJsonSegment) {
+    this.segmentClicked.emit(segment);
+  }
+
+  isClickable(segment: NgxJsonSegment): boolean {
+    return this.isSegmentClickable && this.isSegmentClickable(segment);
+  }
+
+  private parseKeyValue(key: any, value: any): NgxJsonSegment {
+    const segment: NgxJsonSegment = {
+      parent: this._parent,
+      path: this._parent ? `${this._parent.path}.${key}` : key,
       key: key,
       value: value,
       type: undefined,
