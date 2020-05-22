@@ -41,3 +41,26 @@ To collapse all nodes at first:
 ```html
 <ngx-json-viewer [json]="someObject" [expanded]="false"></ngx-json-viewer>
 ```
+
+To make the segment clickable
+
+HTML
+```html
+<ngx-json-viewer [json]="someObject" 
+    [isSegmentClickable]="isClickable"
+    (segmentClicked)="segmentClickHandler($event)"></ngx-json-viewer>
+```
+TS
+```typescript
+const someObject = {users:[{id:123, name:"user1"},{id:234, name:"user2"}]};
+
+function isClickable(segment:NgxJsonSegment):boolean{
+    return segment.path === "users.0.id";
+}
+function segmentClickHandler(segment:NgxJsonSegment){
+    if (segment.path === "users.0.id"){
+        console.log(`the userId is ${segment.value}`);
+    }
+}
+```
+
