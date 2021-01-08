@@ -5680,8 +5680,8 @@ next-tick@~1.0.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
-ngx-json-viewer@../dist/:
-  version "3.0.0"
+ngx-json-viewer@../dist:
+  version "3.0.1"
   dependencies:
     tslib "^2.0.0"
 

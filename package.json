@@ -1,6 +1,6 @@
 {
   "name": "ngx-json-viewer",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "JSON formatter / viewer for Angular 2/4/5/6/7/8+",
   "keywords": [
     "angular",
@@ -25,8 +25,8 @@
   },
   "scripts": {
     "build": "ng-packagr -p package.json",
-    "pack:lib": "npm run build && npm pack ./dist",
-    "publish:lib": "npm run build && npm publish ./dist"
+    "release": "yarn build && yarn publish ./dist",
+    "start": "yarn build && yarn --cwd ./example add ../dist && yarn --cwd ./example start"
   },
   "dependencies": {},
   "peerDependencies": {

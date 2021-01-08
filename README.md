@@ -54,3 +54,8 @@ To collapse all nodes at first:
 ```html
 <ngx-json-viewer [json]="someObject" [expanded]="false"></ngx-json-viewer>
 ```
+
+To only expand 3 levels:
+```html
+<ngx-json-viewer [json]="someObject" [depth]="3"></ngx-json-viewer>
+```

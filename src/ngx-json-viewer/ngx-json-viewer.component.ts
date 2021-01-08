@@ -17,8 +17,9 @@ export class NgxJsonViewerComponent implements OnChanges {
 
   @Input() json: any;
   @Input() expanded = true;
-  @Input() visibleDepth = -1;
   @Input() depth = -1;
+
+  @Input() _currentDepth = -1;
 
   segments: Segment[] = [];
 
@@ -28,7 +29,7 @@ export class NgxJsonViewerComponent implements OnChanges {
     // remove cycles
     this.json = this.decycle(this.json);
 
-    this.depth++;
+    this._currentDepth++;
 
     if (typeof this.json === 'object') {
       Object.keys(this.json).forEach(key => {
@@ -105,7 +106,7 @@ export class NgxJsonViewerComponent implements OnChanges {
   private isExpanded(): boolean {
     return (
       this.expanded &&
-      !(this.visibleDepth > -1 && this.depth >= this.visibleDepth)
+      !(this.depth > -1 && this._currentDepth >= this.depth)
     );
   }
 

@@ -23,6 +23,15 @@ export class AppComponent {
         22222,
         'value3'
       ],
+      'deep object': {
+        'key1': {
+          'deeper': [
+            1,
+            2,
+            3,
+          ],
+        },
+      },
       'simple obect': {
         'key1': 'value1',
         'key2': 22222,
