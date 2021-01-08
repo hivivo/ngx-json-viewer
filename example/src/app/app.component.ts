@@ -30,4 +30,20 @@ export class AppComponent {
       }
     }
   };
+
+  cyclicData = {
+    list: [
+      1,
+      2,
+      3,
+    ] as any[],
+  };
+
+  constructor() {
+    this.cyclicData.list.push(
+      this.cyclicData,
+      this.cyclicData,
+      this.cyclicData.list,
+    );
+  }
 }

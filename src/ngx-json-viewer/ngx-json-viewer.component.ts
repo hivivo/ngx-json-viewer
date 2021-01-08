@@ -17,17 +17,14 @@ export class NgxJsonViewerComponent implements OnChanges {
 
   @Input() json: any;
   @Input() expanded = true;
-  /**
-   * @deprecated It will be always true and deleted in version 3.0.0
-   */
-  @Input() cleanOnChange = true;
 
   segments: Segment[] = [];
 
   ngOnChanges() {
-    if (this.cleanOnChange) {
-      this.segments = [];
-    }
+    this.segments = [];
+
+    // remove cycles
+    this.json = this.decycle(this.json);
 
     if (typeof this.json === 'object') {
       Object.keys(this.json).forEach( key => {
@@ -99,5 +96,47 @@ export class NgxJsonViewerComponent implements OnChanges {
     }
 
     return segment;
+  }
+
+  // https://github.com/douglascrockford/JSON-js/blob/master/cycle.js
+  private decycle(object: any) {
+    const objects = new WeakMap();
+    return (function derez(value, path) {
+      let old_path;
+      let nu: any;
+
+      if (
+        typeof value === 'object'
+        && value !== null
+        && !(value instanceof Boolean)
+        && !(value instanceof Date)
+        && !(value instanceof Number)
+        && !(value instanceof RegExp)
+        && !(value instanceof String)
+      ) {
+        old_path = objects.get(value);
+        if (old_path !== undefined) {
+          return {$ref: old_path};
+        }
+        objects.set(value, path);
+
+        if (Array.isArray(value)) {
+          nu = [];
+          value.forEach(function (element, i) {
+            nu[i] = derez(element, path + '[' + i + ']');
+          });
+        } else {
+          nu = {};
+          Object.keys(value).forEach(function (name) {
+            nu[name] = derez(
+              value[name],
+              path + '[' + JSON.stringify(name) + ']'
+            );
+          });
+        }
+        return nu;
+      }
+      return value;
+    }(object, '$'));
   }
 }
