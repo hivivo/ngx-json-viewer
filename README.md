@@ -1,17 +1,32 @@
 # ngx-json-viewer
 
-JSON formatter and viewer for Angular 2/4/5/6/7+
+JSON formatter and viewer for Angular
 
-Live demo: https://stackblitz.com/edit/ngx-json-viewer
+Live demo:
+- Angular 11: (TODO)
+- Angular 5: https://stackblitz.com/edit/ngx-json-viewer
 
 ## Install
 ```bash
-# For Angular 4/5/6/7:
 npm install ngx-json-viewer
+```
+
+or
+
+```bash
+yarn add ngx-json-viewer
+```
+
+For older Angular:
+
+```bash
+# For Angular 4/5/6/7:
+npm install ngx-json-viewer@2
 
 # For Angular 2:
 npm install ngx-json-viewer@1
 ```
+
 NPM Package: https://www.npmjs.com/package/ngx-json-viewer
 
 ## Usage
