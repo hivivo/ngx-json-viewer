@@ -1,15 +1,15 @@
 $type-colors: (
-  string: #FF6B6B,
-  number: #009688,
-  boolean: #b938a4,
+  string: green,
+  number: #0000ff,
+  boolean: red,
   date: #05668D,
 
   array: #999,
   object: #999,
   function: #999,
 
-  'null': #fff,
-  undefined: #fff
+  'null': #855a00,
+  undefined: #855a00
 );
 
 .ngx-json-viewer {
@@ -21,8 +21,8 @@ $type-colors: (
   position: relative;
 
   .segment {
-    padding: 2px;
-    margin: 1px 1px 1px 12px;
+    padding: 0px;
+    margin: 0px 0px 1px 12px;
 
     .segment-main {
       word-wrap: break-word;
@@ -44,11 +44,13 @@ $type-colors: (
       }
 
       .segment-key {
-        color: #4E187C;
+        color: #00008b;
+        word-wrap: break-word;
+      white-space: pre-line;
       }
 
       .segment-separator {
-        color: #999;
+        color: #00008b;
       }
 
       .segment-value {
@@ -57,7 +59,7 @@ $type-colors: (
     }
 
     .children {
-      margin-left: 12px;
+      margin-left: 4px;
     }
   }
 
@@ -68,9 +70,6 @@ $type-colors: (
   }
 
   // special cases need highlightted
-  .segment-type-null > .segment-main > .segment-value {
-    background-color: red;
-  }
   .segment-type-undefined > .segment-main {
     & > .segment-key {
       color: #999;
@@ -86,6 +85,13 @@ $type-colors: (
 
   .expanded > .toggler::after {
     transform: rotate(90deg);
+  }
+
+  .expandable > .segment-value {
+    display: inline-block;
+    vertical-align: bottom;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .expandable,
