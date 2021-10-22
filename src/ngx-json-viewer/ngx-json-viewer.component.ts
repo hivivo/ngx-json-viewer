@@ -22,9 +22,7 @@ export class NgxJsonViewerComponent implements OnChanges {
   @Input() public length = -1;
   @Input() public restoreExpanded = false;
 
-  @Input() json: any;
-  @Input() expanded = true;
-  @Input() depth = -1;
+  @Input() public showTypeHeadings = false;
 
   @Input() public _currentDepth = -1;
   @Input() public _previouslyOpenKeys?: {[key: string]: any};
