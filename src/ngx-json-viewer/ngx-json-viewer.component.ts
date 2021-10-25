@@ -1,6 +1,6 @@
-import {Component, OnChanges, Input, ViewChildren, QueryList}  from '@angular/core';
+import {Component, OnChanges, Input, ViewChildren, QueryList} from '@angular/core';
 
-export interface Segment {
+export interface ISegment {
   key: string;
   value: any;
   type: undefined | string;
@@ -28,7 +28,7 @@ export class NgxJsonViewerComponent implements OnChanges {
   @Input() public _previouslyOpenKeys?: {[key: string]: any};
 
   public nextOpenKeys: {[key: string]: any} = {};
-  public segments: Segment[] = [];
+  public segments: ISegment[] = [];
 
   // Matches the last underscore in a string
   private underscoreRegex = /_[^_]+$/;
@@ -39,7 +39,7 @@ export class NgxJsonViewerComponent implements OnChanges {
 
   private getOpenKeysRecursive(): any {
     const openKeys: {[key: string]: any} = {};
-    this.childrenComponents.forEach((component : NgxJsonViewerComponent) => {
+    this.childrenComponents.forEach((component: NgxJsonViewerComponent) => {
       // Save key and length - on reload array elements should only be reopened if
       // the array is the same length
       openKeys[component.key + '_' + component.length] = component.getOpenKeysRecursive();
@@ -102,18 +102,18 @@ export class NgxJsonViewerComponent implements OnChanges {
     }
   }
 
-  public isExpandable(segment: Segment): any {
+  public isExpandable(segment: ISegment): any {
     return segment.type === 'object' || segment.type === 'array';
   }
 
-  public toggle(segment: Segment): any {
+  public toggle(segment: ISegment): any {
     if (this.isExpandable(segment)) {
       segment.expanded = !segment.expanded;
     }
   }
 
-  private parseKeyValue(key: any, value: any): Segment {
-    const segment: Segment = {
+  private parseKeyValue(key: any, value: any): ISegment {
+    const segment: ISegment = {
       key: key,
       value: value,
       type: undefined,
