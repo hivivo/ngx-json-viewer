@@ -16,32 +16,21 @@
     "url": "https://github.com/hivivo/ngx-json-viewer/issues"
   },
   "homepage": "https://github.com/hivivo/ngx-json-viewer#readme",
-  "main": "index.ts",
+  "main": "bundles/ngx-json-viewer.umd.js",
   "$schema": "./node_modules/ng-packagr/package.schema.json",
-  "ngPackage": {
-    "lib": {
-      "entryFile": "index.ts"
-    }
-  },
-  "scripts": {
-    "build": "ng-packagr -p package.json",
-    "release": "yarn build && yarn publish ./dist",
-    "start": "yarn build && yarn --cwd ./example add ../dist && yarn --cwd ./example start"
-  },
   "peerDependencies": {
     "@angular/common": ">=8.0.0",
     "@angular/core": ">=8.0.0",
     "rxjs": ">=6.5.2"
   },
-  "devDependencies": {
-    "@angular/common": "^11.0.7",
-    "@angular/compiler": "^11.0.7",
-    "@angular/compiler-cli": "^11.0.7",
-    "@angular/core": "^11.0.7",
-    "ng-packagr": "^11.0.3",
-    "rxjs": "^6.6.0",
-    "tslib": "^2.0.0",
-    "typescript": "~4.1.5",
-    "zone.js": "^0.11.4"
+  "module": "fesm2015/ngx-json-viewer.js",
+  "es2015": "fesm2015/ngx-json-viewer.js",
+  "esm2015": "esm2015/ngx-json-viewer.js",
+  "fesm2015": "fesm2015/ngx-json-viewer.js",
+  "typings": "ngx-json-viewer.d.ts",
+  "metadata": "ngx-json-viewer.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }
