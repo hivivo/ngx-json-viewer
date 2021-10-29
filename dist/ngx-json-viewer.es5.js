@@ -1,9 +1,5 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common'], factory) :
-	(factory((global['ngx-json-viewer'] = {}),global.ng.core,global.ng.common));
-}(this, (function (exports,core,common) { 'use strict';
-
+import { Component, Input, NgModule, ViewChildren } from '@angular/core';
+import { CommonModule } from '@angular/common';
 var NgxJsonViewerComponent = /** @class */ (function () {
     function NgxJsonViewerComponent() {
         this.expanded = true;
@@ -205,7 +201,7 @@ var NgxJsonViewerComponent = /** @class */ (function () {
     return NgxJsonViewerComponent;
 }());
 NgxJsonViewerComponent.decorators = [
-    { type: core.Component, args: [{
+    { type: Component, args: [{
                 selector: 'ngx-json-viewer',
                 template: "\n    <section class=\"ngx-json-viewer\">\n      <section *ngFor=\"let segment of segments\" [ngClass]=\"['segment', 'segment-type-' + segment.type]\">\n        <section\n          (click)=\"toggle(segment)\"\n          [ngClass]=\"{\n            'segment-main': true,\n            expandable: isExpandable(segment),\n            expanded: segment.expanded\n          }\"\n        >\n          <div *ngIf=\"isExpandable(segment)\" class=\"toggler\"></div>\n          <span class=\"segment-key\">{{ segment.key }}</span>\n          <span class=\"segment-separator\">: </span>\n          <span *ngIf=\"!segment.expanded || !isExpandable(segment)\" class=\"segment-value\">{{\n            segment.description\n          }}</span>\n          <span\n            *ngIf=\"showTypeHeadings && segment.expanded && segment.type == 'array'\"\n            class=\"segment-value\"\n            >Array[{{ segment.value.length }}]</span\n          >\n          <span\n            *ngIf=\"showTypeHeadings && segment.expanded && segment.type == 'object'\"\n            class=\"segment-value\"\n            >Object</span\n          >\n        </section>\n        <section *ngIf=\"segment.expanded && isExpandable(segment)\" class=\"children\">\n          <ngx-json-viewer\n            [json]=\"segment.value\"\n            [expanded]=\"expanded\"\n            [depth]=\"depth\"\n            [_currentDepth]=\"_currentDepth\"\n            [key]=\"segment.key\"\n            [length]=\"segment.type === 'array' ? segment.value.length : -1\"\n            [_previouslyOpenKeys]=\"\n              _previouslyOpenKeys &&\n              _previouslyOpenKeys[\n                segment.type === 'array'\n                  ? segment.key + '_' + segment.value.length\n                  : segment.key + '_-1'\n              ]\n            \"\n          ></ngx-json-viewer>\n        </section>\n      </section>\n    </section>\n  ",
                 styles: ["\n    @charset \"UTF-8\";\n    .ngx-json-viewer {\n      font-family: monospace;\n      font-size: 1em;\n      width: 100%;\n      height: 100%;\n      overflow: hidden;\n      position: relative; }\n      .ngx-json-viewer .segment {\n        padding: 0px;\n        margin: 0px 0px 1px 12px; }\n        .ngx-json-viewer .segment .segment-main {\n          word-wrap: break-word; }\n          .ngx-json-viewer .segment .segment-main .toggler {\n            position: absolute;\n            margin-left: -14px;\n            margin-top: 3px;\n            font-size: .8em;\n            line-height: 1.2em;\n            vertical-align: middle;\n            color: #787878; }\n            .ngx-json-viewer .segment .segment-main .toggler::after {\n              display: inline-block;\n              content: \"\u25BA\";\n              -webkit-transition: -webkit-transform 0.1s ease-in;\n              transition: -webkit-transform 0.1s ease-in;\n              transition: transform 0.1s ease-in;\n              transition: transform 0.1s ease-in, -webkit-transform 0.1s ease-in; }\n          .ngx-json-viewer .segment .segment-main .segment-key {\n            color: #00008b;\n            word-wrap: break-word;\n            white-space: pre-line; }\n          .ngx-json-viewer .segment .segment-main .segment-separator {\n            color: #00008b; }\n          .ngx-json-viewer .segment .segment-main .segment-value {\n            color: #000; }\n        .ngx-json-viewer .segment .children {\n          margin-left: 4px; }\n      .ngx-json-viewer .segment-type-string > .segment-main > .segment-value {\n        color: green; }\n      .ngx-json-viewer .segment-type-number > .segment-main > .segment-value {\n        color: #0000ff; }\n      .ngx-json-viewer .segment-type-boolean > .segment-main > .segment-value {\n        color: red; }\n      .ngx-json-viewer .segment-type-date > .segment-main > .segment-value {\n        color: #05668D; }\n      .ngx-json-viewer .segment-type-array > .segment-main > .segment-value {\n        color: #999; }\n      .ngx-json-viewer .segment-type-object > .segment-main > .segment-value {\n        color: #999; }\n      .ngx-json-viewer .segment-type-function > .segment-main > .segment-value {\n        color: #999; }\n      .ngx-json-viewer .segment-type-null > .segment-main > .segment-value {\n        color: #855a00; }\n      .ngx-json-viewer .segment-type-undefined > .segment-main > .segment-value {\n        color: #855a00; }\n      .ngx-json-viewer .segment-type-undefined > .segment-main > .segment-key {\n        color: #999; }\n      .ngx-json-viewer .segment-type-undefined > .segment-main > .segment-value {\n        background-color: #999; }\n      .ngx-json-viewer .segment-type-object > .segment-main,\n      .ngx-json-viewer .segment-type-array > .segment-main {\n        white-space: nowrap; }\n      .ngx-json-viewer .expanded > .toggler::after {\n        -webkit-transform: rotate(90deg);\n                transform: rotate(90deg); }\n      .ngx-json-viewer .expandable > .segment-value {\n        display: inline-block;\n        vertical-align: bottom;\n        text-overflow: ellipsis;\n        overflow: hidden; }\n      .ngx-json-viewer .expandable,\n      .ngx-json-viewer .expandable > .toggler {\n        cursor: pointer; }\n  "]
@@ -216,16 +212,16 @@ NgxJsonViewerComponent.decorators = [
  */
 NgxJsonViewerComponent.ctorParameters = function () { return []; };
 NgxJsonViewerComponent.propDecorators = {
-    'json': [{ type: core.Input },],
-    'expanded': [{ type: core.Input },],
-    'depth': [{ type: core.Input },],
-    'key': [{ type: core.Input },],
-    'length': [{ type: core.Input },],
-    'restoreExpanded': [{ type: core.Input },],
-    'showTypeHeadings': [{ type: core.Input },],
-    '_currentDepth': [{ type: core.Input },],
-    '_previouslyOpenKeys': [{ type: core.Input },],
-    'childrenComponents': [{ type: core.ViewChildren, args: [NgxJsonViewerComponent,] },],
+    'json': [{ type: Input },],
+    'expanded': [{ type: Input },],
+    'depth': [{ type: Input },],
+    'key': [{ type: Input },],
+    'length': [{ type: Input },],
+    'restoreExpanded': [{ type: Input },],
+    'showTypeHeadings': [{ type: Input },],
+    '_currentDepth': [{ type: Input },],
+    '_previouslyOpenKeys': [{ type: Input },],
+    'childrenComponents': [{ type: ViewChildren, args: [NgxJsonViewerComponent,] },],
 };
 var NgxJsonViewerModule = /** @class */ (function () {
     function NgxJsonViewerModule() {
@@ -233,9 +229,9 @@ var NgxJsonViewerModule = /** @class */ (function () {
     return NgxJsonViewerModule;
 }());
 NgxJsonViewerModule.decorators = [
-    { type: core.NgModule, args: [{
+    { type: NgModule, args: [{
                 imports: [
-                    common.CommonModule
+                    CommonModule
                 ],
                 declarations: [
                     NgxJsonViewerComponent
@@ -249,11 +245,8 @@ NgxJsonViewerModule.decorators = [
  * @nocollapse
  */
 NgxJsonViewerModule.ctorParameters = function () { return []; };
-
-exports.NgxJsonViewerModule = NgxJsonViewerModule;
-exports.NgxJsonViewerComponent = NgxJsonViewerComponent;
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
-//# sourceMappingURL=ngx-json-viewer.umd.js.map
+/**
+ * Generated bundle index. Do not edit.
+ */
+export { NgxJsonViewerModule, NgxJsonViewerComponent };
+//# sourceMappingURL=ngx-json-viewer.es5.js.map

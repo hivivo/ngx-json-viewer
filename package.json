@@ -16,7 +16,7 @@
     "url": "https://github.com/hivivo/ngx-json-viewer/issues"
   },
   "homepage": "https://github.com/hivivo/ngx-json-viewer#readme",
-  "main": "index.ts",
+  "main": "dist/index.ts",
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "ngPackage": {
     "lib": {
