@@ -24,12 +24,12 @@ export declare class NgxJsonViewerComponent implements OnChanges {
     segments: ISegment[];
     private underscoreRegex;
     childrenComponents: QueryList<NgxJsonViewerComponent>;
-    private getOpenKeysRecursive();
-    private openSegments();
+    private getOpenKeysRecursive;
+    private openSegments;
     ngOnChanges(): void;
     isExpandable(segment: ISegment): any;
     toggle(segment: ISegment): any;
-    private parseKeyValue(key, value);
-    private isExpanded();
-    private decycle(object);
+    private parseKeyValue;
+    private isExpanded;
+    private decycle;
 }

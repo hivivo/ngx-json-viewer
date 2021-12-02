@@ -29,9 +29,9 @@
     "start": "yarn build && yarn --cwd ./example add ../dist && yarn --cwd ./example start"
   },
   "peerDependencies": {
-    "@angular/common": ">=8.0.0",
-    "@angular/core": ">=8.0.0",
-    "rxjs": ">=6.5.2"
+    "@angular/common": ">=10.0.0",
+    "@angular/core": ">=10.0.0",
+    "rxjs": ">=6.6.2"
   },
   "devDependencies": {
     "@angular/common": "^11.0.7",
