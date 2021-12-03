@@ -20,8 +20,6 @@ export class NgxJsonViewerComponent implements OnChanges {
   @Input() public restoreExpanded = false;
   @Input() public showTypeHeadings = false;
 
-  // Tracks the length of array types. -1 for other types
-  @Input() public _length = -1;
   @Input() public _key = 'Object';
   @Input() public _previouslyOpenKeys?: {[key: string]: any};
   @Input() public _currentDepth = -1;
