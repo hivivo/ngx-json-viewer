@@ -33,14 +33,7 @@
         [_key]="segment.key"
         [_currentDepth]="_currentDepth"
         [_length]="segment.type === 'array' ? segment.value.length : -1"
-        [_previouslyOpenKeys]="
-          _previouslyOpenKeys &&
-          _previouslyOpenKeys[
-            segment.type === 'array'
-              ? segment.key + '_' + segment.value.length
-              : segment.key + '_-1'
-          ]
-        "
+        [_previouslyOpenKeys]="_previouslyOpenKeys && _previouslyOpenKeys[segment.key]"
       ></ngx-json-viewer>
     </section>
   </section>

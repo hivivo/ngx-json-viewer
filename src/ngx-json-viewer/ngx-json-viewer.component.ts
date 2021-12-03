@@ -53,9 +53,7 @@ export class NgxJsonViewerComponent implements OnChanges {
     keys.forEach((key) => {
       // Check to see if the key exists, if so expands it
       const strippedKey = key.replace(this.underscoreRegex, '');
-      const foundSegment = this.segments.find((segment) => {
-        return segment.key === strippedKey;
-      });
+      const foundSegment = this.segments.find((segment) => segment.key === strippedKey);
 
       if (!foundSegment) {
         return;
