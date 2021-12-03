@@ -11,21 +11,20 @@ export interface ISegment {
 @Component({
   selector: 'ngx-json-viewer',
   templateUrl: './ngx-json-viewer.component.html',
-  styleUrls: ['./ngx-json-viewer.component.scss']
+  styleUrls: ['./ngx-json-viewer.component.scss'],
 })
 export class NgxJsonViewerComponent implements OnChanges {
   @Input() public json: any;
   @Input() public expanded = true;
   @Input() public depth = -1;
-  @Input() public key = 'Object';
-  // Tracks the length of array types. -1 for other types
-  @Input() public length = -1;
   @Input() public restoreExpanded = false;
-
   @Input() public showTypeHeadings = false;
 
-  @Input() public _currentDepth = -1;
+  // Tracks the length of array types. -1 for other types
+  @Input() public _length = -1;
+  @Input() public _key = 'Object';
   @Input() public _previouslyOpenKeys?: {[key: string]: any};
+  @Input() public _currentDepth = -1;
 
   public nextOpenKeys: {[key: string]: any} = {};
   public segments: ISegment[] = [];
@@ -33,16 +32,14 @@ export class NgxJsonViewerComponent implements OnChanges {
   // Matches the last underscore in a string
   private underscoreRegex = /_[^_]+$/;
 
-  @ViewChildren(NgxJsonViewerComponent) public childrenComponents: QueryList<
-  NgxJsonViewerComponent
-  >;
+  @ViewChildren(NgxJsonViewerComponent)
+  public childrenComponents: QueryList<NgxJsonViewerComponent>;
 
   private getOpenKeysRecursive(): any {
     const openKeys: {[key: string]: any} = {};
-    this.childrenComponents.forEach((component: NgxJsonViewerComponent) => {
-      // Save key and length - on reload array elements should only be reopened if
-      // the array is the same length
-      openKeys[component.key + '_' + component.length] = component.getOpenKeysRecursive();
+    this.childrenComponents.forEach((component) => {
+      // Save key and length
+      openKeys[component._key] = component.getOpenKeysRecursive();
     });
 
     if (Object.keys(openKeys).length === 0) {
@@ -53,10 +50,10 @@ export class NgxJsonViewerComponent implements OnChanges {
 
   private openSegments(): void {
     const keys = Object.keys(this._previouslyOpenKeys!);
-    keys.forEach(key => {
+    keys.forEach((key) => {
       // Check to see if the key exists, if so expands it
       const strippedKey = key.replace(this.underscoreRegex, '');
-      const foundSegment = this.segments.find(segment => {
+      const foundSegment = this.segments.find((segment) => {
         return segment.key === strippedKey;
       });
 
@@ -77,7 +74,6 @@ export class NgxJsonViewerComponent implements OnChanges {
     // Will only run in top level
     if (this.restoreExpanded && this.childrenComponents) {
       this._previouslyOpenKeys = this.getOpenKeysRecursive();
-      console.log(this._previouslyOpenKeys);
     }
 
     this.segments = [];
@@ -88,7 +84,7 @@ export class NgxJsonViewerComponent implements OnChanges {
     this._currentDepth++;
 
     if (typeof this.json === 'object') {
-      Object.keys(this.json).forEach(key => {
+      Object.keys(this.json).forEach((key) => {
         this.segments.push(this.parseKeyValue(key, this.json[key]));
       });
     } else {
@@ -199,7 +195,7 @@ export class NgxJsonViewerComponent implements OnChanges {
           });
         } else {
           nu = {};
-          Object.keys(value).forEach(name => {
+          Object.keys(value).forEach((name) => {
             nu[name] = derez(value[name], path + '[' + JSON.stringify(name) + ']');
           });
         }

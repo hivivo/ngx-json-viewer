@@ -10,14 +10,14 @@ export declare class NgxJsonViewerComponent implements OnChanges {
     json: any;
     expanded: boolean;
     depth: number;
-    key: string;
-    length: number;
     restoreExpanded: boolean;
     showTypeHeadings: boolean;
-    _currentDepth: number;
+    _length: number;
+    _key: string;
     _previouslyOpenKeys?: {
         [key: string]: any;
     };
+    _currentDepth: number;
     nextOpenKeys: {
         [key: string]: any;
     };

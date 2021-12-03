@@ -1543,7 +1543,7 @@
     "iconv-lite" "^0.4.4"
     "sax" "^1.2.4"
 
-"ng-packagr@^11.0.3":
+"ng-packagr@^11.2.4":
   "integrity" "sha512-pAZYRWe4duLx6bXgfNKgT2XBHiepWz2sA+CaJ9UYEbLHE+QxYGtw/PJAC6o0zRDv1bBCkv5oquKTyTZtYjkAQQ=="
   "resolved" "https://registry.npmjs.org/ng-packagr/-/ng-packagr-11.2.4.tgz"
   "version" "11.2.4"

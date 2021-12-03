@@ -30,9 +30,9 @@
         [json]="segment.value"
         [expanded]="expanded"
         [depth]="depth"
+        [_key]="segment.key"
         [_currentDepth]="_currentDepth"
-        [key]="segment.key"
-        [length]="segment.type === 'array' ? segment.value.length : -1"
+        [_length]="segment.type === 'array' ? segment.value.length : -1"
         [_previouslyOpenKeys]="
           _previouslyOpenKeys &&
           _previouslyOpenKeys[

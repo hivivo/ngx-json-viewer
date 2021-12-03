@@ -1,15 +1,13 @@
 $type-colors: (
-  string: green,
+  string: #008000,
   number: #0000ff,
-  boolean: red,
-  date: #05668D,
-
+  boolean: #ff0000,
+  date: #05668d,
   array: #999,
   object: #999,
   function: #999,
-
   'null': #855a00,
-  undefined: #855a00
+  undefined: #855a00,
 );
 
 .ngx-json-viewer {
@@ -31,14 +29,14 @@ $type-colors: (
         position: absolute;
         margin-left: -14px;
         margin-top: 3px;
-        font-size: .8em;
+        font-size: 0.8em;
         line-height: 1.2em;
         vertical-align: middle;
         color: #787878;
 
         &::after {
           display: inline-block;
-          content: "►";
+          content: '►';
           transition: transform 0.1s ease-in;
         }
       }
@@ -46,7 +44,7 @@ $type-colors: (
       .segment-key {
         color: #00008b;
         word-wrap: break-word;
-      white-space: pre-line;
+        white-space: pre-line;
       }
 
       .segment-separator {
