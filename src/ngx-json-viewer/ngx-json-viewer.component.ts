@@ -20,15 +20,12 @@ export class NgxJsonViewerComponent implements OnChanges {
   @Input() public restoreExpanded = false;
   @Input() public showTypeHeadings = false;
 
-  @Input() public _key = 'Object';
+  @Input() public _key: string;
   @Input() public _previouslyOpenKeys?: {[key: string]: any};
   @Input() public _currentDepth = -1;
 
   public nextOpenKeys: {[key: string]: any} = {};
   public segments: ISegment[] = [];
-
-  // Matches the last underscore in a string
-  private underscoreRegex = /_[^_]+$/;
 
   @ViewChildren(NgxJsonViewerComponent)
   public childrenComponents: QueryList<NgxJsonViewerComponent>;
@@ -50,8 +47,7 @@ export class NgxJsonViewerComponent implements OnChanges {
     const keys = Object.keys(this._previouslyOpenKeys!);
     keys.forEach((key) => {
       // Check to see if the key exists, if so expands it
-      const strippedKey = key.replace(this.underscoreRegex, '');
-      const foundSegment = this.segments.find((segment) => segment.key === strippedKey);
+      const foundSegment = this.segments.find((segment) => segment.key === key);
 
       if (!foundSegment) {
         return;

@@ -7,12 +7,9 @@ class NgxJsonViewerComponent {
         this.depth = -1;
         this.restoreExpanded = false;
         this.showTypeHeadings = false;
-        this._key = 'Object';
         this._currentDepth = -1;
         this.nextOpenKeys = {};
         this.segments = [];
-        // Matches the last underscore in a string
-        this.underscoreRegex = /_[^_]+$/;
     }
     getOpenKeysRecursive() {
         const openKeys = {};
@@ -29,8 +26,7 @@ class NgxJsonViewerComponent {
         const keys = Object.keys(this._previouslyOpenKeys);
         keys.forEach((key) => {
             // Check to see if the key exists, if so expands it
-            const strippedKey = key.replace(this.underscoreRegex, '');
-            const foundSegment = this.segments.find((segment) => segment.key === strippedKey);
+            const foundSegment = this.segments.find((segment) => segment.key === key);
             if (!foundSegment) {
                 return;
             }

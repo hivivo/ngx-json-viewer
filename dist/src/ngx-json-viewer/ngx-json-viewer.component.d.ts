@@ -21,7 +21,6 @@ export declare class NgxJsonViewerComponent implements OnChanges {
         [key: string]: any;
     };
     segments: ISegment[];
-    private underscoreRegex;
     childrenComponents: QueryList<NgxJsonViewerComponent>;
     private getOpenKeysRecursive;
     private openSegments;
