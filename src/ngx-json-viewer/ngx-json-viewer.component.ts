@@ -24,7 +24,6 @@ export class NgxJsonViewerComponent implements OnChanges {
   @Input() public _previouslyOpenKeys?: {[key: string]: any};
   @Input() public _currentDepth = -1;
 
-  public nextOpenKeys: {[key: string]: any} = {};
   public segments: ISegment[] = [];
 
   @ViewChildren(NgxJsonViewerComponent)

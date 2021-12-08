@@ -17,9 +17,6 @@ export declare class NgxJsonViewerComponent implements OnChanges {
         [key: string]: any;
     };
     _currentDepth: number;
-    nextOpenKeys: {
-        [key: string]: any;
-    };
     segments: ISegment[];
     childrenComponents: QueryList<NgxJsonViewerComponent>;
     private getOpenKeysRecursive;

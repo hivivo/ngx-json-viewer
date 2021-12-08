@@ -8,7 +8,6 @@ class NgxJsonViewerComponent {
         this.restoreExpanded = false;
         this.showTypeHeadings = false;
         this._currentDepth = -1;
-        this.nextOpenKeys = {};
         this.segments = [];
     }
     getOpenKeysRecursive() {
