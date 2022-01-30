@@ -1,7 +1,8 @@
-<ngx-json-viewer [json]="data" [expanded]="false"></ngx-json-viewer>
+<input type="text" [(ngModel)]="text">
+<ngx-json-viewer [json]="data" [expanded]="true" [searchTerm]="text"></ngx-json-viewer>
 <hr />
 <ngx-json-viewer [json]="data"></ngx-json-viewer>
 <hr />
-<ngx-json-viewer [json]="data" [depth]="3"></ngx-json-viewer>
+<ngx-json-viewer [json]="data" [depth]="3" [searchTerm]="text"></ngx-json-viewer>
 <hr />
 <ngx-json-viewer [json]="cyclicData"></ngx-json-viewer>
