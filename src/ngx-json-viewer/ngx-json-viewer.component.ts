@@ -51,28 +51,6 @@ export class NgxJsonViewerComponent implements OnChanges {
     }
   }
 
-  search() {
-    console.log("searchTerm ::: ", this._searchTerm);
-    console.log("segments ::: ", this.segments);
-    this.segments.forEach((segment) => {
-      if (segment.key.includes(this._searchTerm)) {
-        segment.markKey = true;
-      } else {
-        segment.markKey = false;
-      }
-
-      if (
-        typeof segment.value === "string" &&
-        segment.value.includes(this._searchTerm)
-      ) {
-        segment.markValue = true;
-      } else {
-        segment.markValue = false;
-      }
-    });
-    this.segments = [...this.segments];
-  }
-
   isMarkedStyle(value: boolean) {
     return {
       // prettier-ignore
