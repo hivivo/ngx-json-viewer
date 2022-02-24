@@ -16,21 +16,34 @@
     "url": "https://github.com/hivivo/ngx-json-viewer/issues"
   },
   "homepage": "https://github.com/hivivo/ngx-json-viewer#readme",
-  "main": "bundles/ngx-json-viewer.umd.js",
+  "main": "dist/index.ts",
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "peerDependencies": {
     "@angular/common": ">=10.0.0",
     "@angular/core": ">=10.0.0",
     "rxjs": ">=6.6.2"
   },
-  "module": "fesm2015/ngx-json-viewer.js",
-  "es2015": "fesm2015/ngx-json-viewer.js",
-  "esm2015": "esm2015/ngx-json-viewer.js",
-  "fesm2015": "fesm2015/ngx-json-viewer.js",
+  "module": "fesm2015/ngx-json-viewer.mjs",
+  "es2020": "fesm2020/ngx-json-viewer.mjs",
+  "esm2020": "esm2020/ngx-json-viewer.mjs",
+  "fesm2020": "fesm2020/ngx-json-viewer.mjs",
+  "fesm2015": "fesm2015/ngx-json-viewer.mjs",
   "typings": "ngx-json-viewer.d.ts",
-  "metadata": "ngx-json-viewer.metadata.json",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./ngx-json-viewer.d.ts",
+      "esm2020": "./esm2020/ngx-json-viewer.mjs",
+      "es2020": "./fesm2020/ngx-json-viewer.mjs",
+      "es2015": "./fesm2015/ngx-json-viewer.mjs",
+      "node": "./fesm2015/ngx-json-viewer.mjs",
+      "default": "./fesm2020/ngx-json-viewer.mjs"
+    }
+  },
   "sideEffects": false,
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.3.0"
   }
 }
