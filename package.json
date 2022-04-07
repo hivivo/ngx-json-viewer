@@ -18,13 +18,8 @@
   "homepage": "https://github.com/hivivo/ngx-json-viewer#readme",
   "main": "index.ts",
   "$schema": "./node_modules/ng-packagr/package.schema.json",
-  "ngPackage": {
-    "lib": {
-      "entryFile": "index.ts"
-    }
-  },
   "scripts": {
-    "build": "ng-packagr -p package.json",
+    "build": "ng-packagr -p ng-package.json",
     "release": "yarn build && yarn publish ./dist",
     "start": "yarn build && yarn --cwd ./example add ../dist && yarn --cwd ./example start"
   },
