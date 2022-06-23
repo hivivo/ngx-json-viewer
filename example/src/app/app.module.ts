@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 import { AppComponent } from './app.component';

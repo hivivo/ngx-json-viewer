@@ -18,7 +18,7 @@ yarn add ngx-json-viewer
 For older Angular:
 
 ```bash
-# For Angular 4/5/6/7:
+# For Angular 4/5/6/7+:
 npm install ngx-json-viewer@2
 
 # For Angular 2:
