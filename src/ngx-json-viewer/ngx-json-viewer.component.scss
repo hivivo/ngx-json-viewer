@@ -1,20 +1,20 @@
 $type-colors: (
-  string: #FF6B6B,
-  number: #009688,
-  boolean: #b938a4,
-  date: #05668D,
+  string: var(--ngx-json-string, #FF6B6B),
+  number: var(--ngx-json-number, #009688),
+  boolean: var(--ngx-json-boolean, #B938A4),
+  date: var(--ngx-json-date, #05668D),
 
-  array: #999,
-  object: #999,
-  function: #999,
+  array: var(--ngx-json-array, #999),
+  object: var(--ngx-json-object, #999),
+  function: var(--ngx-json-function, #999),
 
-  'null': #fff,
-  undefined: #fff
+  'null': var(--ngx-json-null, #fff),
+  undefined: var(--ngx-json-undefined, #fff)
 );
 
 .ngx-json-viewer {
-  font-family: monospace;
-  font-size: 1em;
+  font-family: var(--ngx-json-font-family, monospace);
+  font-size: var(--ngx-json-font-size, 1em);
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -34,7 +34,7 @@ $type-colors: (
         font-size: .8em;
         line-height: 1.2em;
         vertical-align: middle;
-        color: #787878;
+        color: var(--ngx-json-toggler, #787878);
 
         &::after {
           display: inline-block;
@@ -44,15 +44,15 @@ $type-colors: (
       }
 
       .segment-key {
-        color: #4E187C;
+        color: var(--ngx-json-key, #4E187C);
       }
 
       .segment-separator {
-        color: #999;
+        color: var(--ngx-json-separator, #999);
       }
 
       .segment-value {
-        color: #000;
+        color: var(--ngx-json-value, #000);
       }
     }
 
@@ -63,20 +63,20 @@ $type-colors: (
 
   @each $type, $color in $type-colors {
     .segment-type-#{$type} > .segment-main > .segment-value {
-      color: $color;
+      color: #{$color};
     }
   }
 
-  // special cases need highlightted
+  // special cases need highlighted
   .segment-type-null > .segment-main > .segment-value {
-    background-color: red;
+    background-color: var(--ngx-json-null-bg, red);
   }
   .segment-type-undefined > .segment-main {
     & > .segment-key {
-      color: #999;
+      color: var(--ngx-json-undefined-key, #999);
     }
     & > .segment-value {
-      background-color: #999;
+      background-color: var(--ngx-json-undefined-key, #999);
     }
   }
   .segment-type-object > .segment-main,
