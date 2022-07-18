@@ -79,3 +79,5 @@ Theming can be done with CSS variables
 * --ngx-json-separator : color of separators
 * --ngx-json-value : color of values
 * --ngx-json-undefined-key : color for key of undefined values
+* --ngx-json-font-family : font-family 
+* --ngx-json-font-family : font-size 

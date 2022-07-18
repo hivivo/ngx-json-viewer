@@ -13,8 +13,8 @@ $type-colors: (
 );
 
 .ngx-json-viewer {
-  font-family: monospace;
-  font-size: 1em;
+  font-family: var(--ngx-json-font-family, monospace);
+  font-size: var(--ngx-json-font-size, 1em);
   width: 100%;
   height: 100%;
   overflow: hidden;
