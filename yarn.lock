@@ -1384,9 +1384,9 @@ needle@^3.1.0:
     sax "^1.2.4"
 
 ng-packagr@^14.0.2:
-  version "14.2.0"
-  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-14.2.0.tgz#c687bfbebaa6624c92bf26755dfadf7ef70e7da5"
-  integrity sha512-Nb+2/L37CFcWmCz91USwNd87mdTfTXDb4MBl87Dkj2H53KfrAltX2psa+gTRbjE5USCX8bQeu4nRzf/Bp6Vivg==
+  version "14.2.1"
+  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-14.2.1.tgz#9b00cf2674cf4ac240dfed87a708c55043f90008"
+  integrity sha512-o2t/a+DdhUEbXXPbR70LZcU4WcSf7wnddCiQcc3k0HrTQjxWspv0qFUdba3+0ft0dVetaywa6lc+98g/SZEKcQ==
   dependencies:
     "@rollup/plugin-json" "^4.1.0"
     "@rollup/plugin-node-resolve" "^13.1.3"
