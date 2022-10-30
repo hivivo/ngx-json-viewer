@@ -2,7 +2,9 @@
 
 JSON formatter and viewer for Angular
 
-Live demo: https://stackblitz.com/edit/ngx-json-viewer
+Live demo:
+- Angular 14: https://stackblitz.com/edit/angular-14-ngx-json-viewer
+- Angular 5: https://stackblitz.com/edit/ngx-json-viewer
 
 ## Install
 ```bash
