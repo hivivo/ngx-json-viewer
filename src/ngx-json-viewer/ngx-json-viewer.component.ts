@@ -8,6 +8,43 @@ export interface Segment {
   expanded: boolean;
 }
 
+function previewLimited(obj:any, limit = 100, stringsLimit = 10) {
+  let result = '';
+
+  if (typeof obj === 'string') {
+    if(obj.length > stringsLimit)
+      result += `"${obj.substring(0, stringsLimit)}…"`;
+    else
+      result += `"${obj}"`;
+  } else if (typeof obj === 'boolean') {
+    result += `${obj ? 'true' : 'false'}`;
+  } else if (typeof obj === 'number') {
+    result += `${obj}`;
+  } else if (typeof obj === 'object'){
+    const isArray = Array.isArray(obj)
+    result += isArray ? `(${obj.length})[` : '{';
+    for (const key in obj) {
+      const value = obj[key];
+
+      result += isArray ? '': `${key}: `;
+
+      if(result.length >= limit)
+        return result.substring(0, limit)
+
+      result += previewLimited(value, limit - result.length);
+      result += `, `;
+    }
+    if(result.endsWith(', '))
+      result = result.slice(0, -2)
+    result += isArray ? ']' : '}';
+  }
+
+  if(result.length >= limit)
+    return result.substring(0, limit)
+
+  return result;
+}
+
 @Component({
   selector: 'ngx-json-viewer',
   templateUrl: './ngx-json-viewer.component.html',
@@ -87,12 +124,12 @@ export class NgxJsonViewerComponent implements OnChanges {
           segment.description = 'null';
         } else if (Array.isArray(segment.value)) {
           segment.type = 'array';
-          segment.description = 'Array[' + segment.value.length + '] ' + JSON.stringify(segment.value);
+          segment.description = previewLimited(segment.value, 200);
         } else if (segment.value instanceof Date) {
           segment.type = 'date';
         } else {
           segment.type = 'object';
-          segment.description = 'Object ' + JSON.stringify(segment.value);
+          segment.description = previewLimited(segment.value, 200);
         }
         break;
       }
