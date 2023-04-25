@@ -8,6 +8,8 @@ $type-colors: (
   object: var(--ngx-json-object, #999),
   function: var(--ngx-json-function, #999),
 
+  link: var(--ngx-json-link, #9B59B6),
+
   'null': var(--ngx-json-null, #fff),
   undefined: var(--ngx-json-undefined, #fff)
 );
@@ -79,6 +81,12 @@ $type-colors: (
       background-color: var(--ngx-json-undefined-key, #999);
     }
   }
+
+  .segment-type-link > .segment-main > .segment-value {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
   .segment-type-object > .segment-main,
   .segment-type-array > .segment-main {
     white-space: nowrap;
