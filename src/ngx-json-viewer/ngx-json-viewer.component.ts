@@ -21,6 +21,8 @@ export class NgxJsonViewerComponent implements OnChanges {
 
   @Input() _currentDepth = 0;
 
+  @Input() parentPath: string = '';
+
   segments: Segment[] = [];
 
   ngOnChanges() {
@@ -148,5 +150,11 @@ export class NgxJsonViewerComponent implements OnChanges {
       }
       return value;
     }(object, '$'));
+  }
+
+  getSegmentKeyAndPath(segment: any){
+    // logs segment json parent path + segment key clicked
+    console.log("JSON Parent path : " + this.parentPath);
+    console.log("Segment Key Clicked : " + segment.key);
   }
 }
