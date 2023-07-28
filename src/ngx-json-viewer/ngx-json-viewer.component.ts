@@ -117,9 +117,7 @@ export class NgxJsonViewerComponent implements OnChanges {
   }
 
   private isLink(value: string): boolean {
-    return value.substring(0, 8) === 'https://' ||
-      value.substring(0, 7) === 'http://' ||
-      value[0] === '/'
+    return /.*:\/{2,2}|^\/|.*:[^\/]/gmi.test(value)
   }
 
   private isExpanded(): boolean {
