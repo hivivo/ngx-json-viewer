@@ -4,6 +4,7 @@
     [ngClass]="['segment', 'segment-type-' + segment.type]">
     <section
       (click)="toggle(segment)"
+      (click)="emitJsonPath(segment)"
       [ngClass]="{
         'segment-main': true,
         'expandable': isExpandable(segment),
@@ -15,7 +16,7 @@
       <span *ngIf="!segment.expanded || !isExpandable(segment)" class="segment-value">{{ segment.description }}</span>
     </section>
     <section *ngIf="segment.expanded && isExpandable(segment)" class="children">
-      <ngx-json-viewer [json]="segment.value" [expanded]="expanded" [depth]="depth" [_currentDepth]="_currentDepth+1"></ngx-json-viewer>
+      <ngx-json-viewer [json]="segment.value" [expanded]="expanded" [depth]="depth" [_currentDepth]="_currentDepth+1" (jsonPath)="jsonPathEmitHandler($event)" [parentPath]="parentPath + ( parentPath ? ',' : '' ) + segment.key"></ngx-json-viewer>
     </section>
   </section>
 </section>

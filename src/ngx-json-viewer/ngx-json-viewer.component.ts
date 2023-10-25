@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
 export interface Segment {
   key: string;
@@ -6,6 +6,11 @@ export interface Segment {
   type: undefined | string;
   description: string;
   expanded: boolean;
+}
+
+export interface JsonPath {
+  segment: Segment;
+  parentPath: string;
 }
 
 @Component({
@@ -20,6 +25,9 @@ export class NgxJsonViewerComponent implements OnChanges {
   @Input() depth = -1;
 
   @Input() _currentDepth = 0;
+
+  @Input() parentPath: string = ''; // path of root parent until current children node
+  @Output() jsonPath: EventEmitter<JsonPath> = new EventEmitter(); // emits JsonPath object to parent
 
   segments: Segment[] = [];
 
@@ -148,5 +156,13 @@ export class NgxJsonViewerComponent implements OnChanges {
       }
       return value;
     }(object, '$'));
+  }
+
+  emitJsonPath(segment: any){ // emit the JsonPath object to parent
+    this.jsonPath.emit({ segment: segment, parentPath: this.parentPath })
+  }
+
+  jsonPathEmitHandler(jsonPath: JsonPath){ // emits the JsonPath object from children node until the root parent node
+    this.jsonPath.emit(jsonPath);
   }
 }
