@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
 export interface Segment {
   key: string;
@@ -20,6 +20,8 @@ export class NgxJsonViewerComponent implements OnChanges {
   @Input() depth = -1;
 
   @Input() _currentDepth = 0;
+
+  @Output() segmentLinkClicked: EventEmitter<string> = new EventEmitter<string>();
 
   segments: Segment[] = [];
 
@@ -48,6 +50,14 @@ export class NgxJsonViewerComponent implements OnChanges {
     }
   }
 
+  onValueClick(segment: Segment) {
+    if (segment.type === 'link') this.segmentLinkClicked.emit(segment.value)
+  }
+
+  onSegmentLinkClick(link: string) {
+    this.segmentLinkClicked.emit(link)
+  }
+
   private parseKeyValue(key: any, value: any): Segment {
     const segment: Segment = {
       key: key,
@@ -71,6 +81,11 @@ export class NgxJsonViewerComponent implements OnChanges {
         break;
       }
       case 'string': {
+        if (this.isLink(segment.value)) {
+          segment.type = 'link';
+          break;
+        }
+
         segment.type = 'string';
         segment.description = '"' + segment.value + '"';
         break;
@@ -99,6 +114,10 @@ export class NgxJsonViewerComponent implements OnChanges {
     }
 
     return segment;
+  }
+
+  private isLink(value: string): boolean {
+    return /.*:\/{2,2}|^\/|.*:[^\/]/gmi.test(value)
   }
 
   private isExpanded(): boolean {
